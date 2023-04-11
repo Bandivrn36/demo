@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>File Upload</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <a class="navbar-brand" href="#">Cloud Storage</a>
+    <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+            <a class="nav-link" href="/">Home</a>
+        </li>
+        <li class="nav-item active">
+            <a class="nav-link" href="/file">Files</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/logout">Logout</a>
+        </li>
+    </ul>
+</nav>
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-12">
+            <form id="my-dropzone" class="dropzone">
+                <div class="dz-message">
+                    <div class="col-xs-8">
+                        <div class="message">
+                            <p>Drag files here or click to upload.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="fallback">
+                    <input name="file" type="file" multiple/>
+                </div>
+                <div class="dropzone-previews" id="dropzonePreview"></div>
+                <button type="submit" class="btn btn-primary mt-2" id="submit-all">Upload</button>
+            </form>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <h3>Files:</h3>
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>Filename</th>
+                    <th>Size</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="userFile : ${userFiles}">
+                    <td th:text="${userFile.filename}"></td>
+                    <td th:text="${userFile.size}"></td>
+                    <td>
+                        <form th:action="@{/files/delete/{id}(id=${userFile.id})}" method="post">
+                            <input type="hidden" name="_method" value="delete"/>
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="/js/dropzone.js"></script>
+<script src="/js/script.js"></script>
+</body>
+</html>

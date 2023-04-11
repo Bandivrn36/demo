@@ -1,0 +1,42 @@
+server:
+  port: 8081
+
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: "root"
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
+  servlet:
+    multipart:
+      max-file-size: 500MB
+      max-request-size: 500MB
+
+jwt:
+  secret: mysecretkey
+  expiration-time: 86400000
+  prefix: Bearer
+  header: Authorization
+
+file:
+  storage:
+    path: D:\filesServ
+
+  logging:
+    level: root=DEBUG
+
+handlers:
+  - java.util.logging.FileHandler
+.level: ALL
+
+java.util.logging.FileHandler.pattern: D:/IDE projects/cloud/demo/srcmyapp.log
+java.util.logging.FileHandler.level: DEBUG
+java.util.logging.FileHandler.formatter: java.util.logging.SimpleFormatter
+
